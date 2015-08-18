@@ -23,6 +23,8 @@ gem 'coffee-rails', '4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'bootstrap-sass', '3.3.5'
+
 gem 'devise', '3.5.2'
 
 gem 'stripe', '1.25.0'
