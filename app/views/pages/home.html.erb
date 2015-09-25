@@ -7,37 +7,59 @@
 <p>A community of independent artists from around the world working together to provide quality entertainment.</p>
 </div>
 <div class="row">
-    <div class="col-md-6">
-        <div class="well">
-            <h3 class="text-centered">Free Membership</h3>
-            <ul>
-                <li>Create Profile</li>
-                <li>Upload Resume</li>
-                <li>Link to Reel and/or Portfolio</li>
-                <li>View User Profiles</li>
-                <li>View Projects</li>
-                <li>Post in Public Forums</li>
-            </ul>
-            </br>
-            </br>
-            <%= link_to "Sign Up Free", new_user_registration_path(plan: @basic_plan.id), class: 'btn btn-primary btn-lg btn-block' %>
-
+     <%if user_signed_in? %>
+        <div class="col-md-6">
+            <div class="well">
+                <h2 class="text-center">Your Profile</h2>
+                <% if current_user.profile %>
+                    <%= link_to "Edit Your Profile", edit_user_profile_path(user_id: current_user.id), class: "btn btn-default btn-lg btn-block" %>
+                    <%= link_to "View Your Profile", user_path(current_user), class: "btn btn-default btn-lg btn-block" %>
+                <%else%>
+                    <p>Create your profile so you can connect with the community of filmmakers.</p>
+                    <%= link_to "Create your profile!", new_user_profile_path(current_user), class: 'btn btn-primary btn-lg btn-block' if current_user %>
+                <% end %>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="well">
-            <h3 class="text-centered">Pro Membership</h3>
-            <ul>
-                <li>Create Profile</li>
-                <li>Upload Resume</li>
-                <li>Link to Reel and/or Portfolio</li>
-                <li>View User Profiles</li>
-                <li>Upload Photos and Videos</li>
-                <li>Contact other Users</li>
-                <li>Create and Post in Private Forums</li>
-                <li>Create Projects</li>
-            </ul>
-            <%= link_to "Sign Up for Pro", new_user_registration_path(plan: @pro_plan.id), class: 'btn btn-success btn-lg btn-block' %>
+        <div class="col-md-6">
+            <div class="well">
+                <h2 class="text-center">The Community</h2>
+                <p>Visit the community and meet your fellow filmmakers, find jobs, and work on Independent projects!</p>
+                <%= link_to "Visit the community", "#", class: 'btn btn-default btn-lg btn-block' %>
+            </div>
         </div>
-    </div>
+    <%else%>
+        <div class="col-md-6">
+            <div class="well">
+                <h3 class="text-centered">Free Membership</h3>
+                <ul>
+                    <li>Create Profile</li>
+                    <li>Upload Resume</li>
+                    <li>Link to Reel and/or Portfolio</li>
+                    <li>View User Profiles</li>
+                    <li>View Projects</li>
+                    <li>Post in Public Forums</li>
+                </ul>
+                </br>
+                </br>
+                <%= link_to "Sign Up Free", new_user_registration_path(plan: @basic_plan.id), class: 'btn btn-primary btn-lg btn-block' %>
+    
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well">
+                <h3 class="text-centered">Pro Membership</h3>
+                <ul>
+                    <li>Create Profile</li>
+                    <li>Upload Resume</li>
+                    <li>Link to Reel and/or Portfolio</li>
+                    <li>View User Profiles</li>
+                    <li>Upload Photos and Videos</li>
+                    <li>Contact other Users</li>
+                    <li>Create and Post in Private Forums</li>
+                    <li>Create Projects</li>
+                </ul>
+                <%= link_to "Sign Up for Pro", new_user_registration_path(plan: @pro_plan.id), class: 'btn btn-success btn-lg btn-block' %>
+            </div>
+        </div>
+    <%end%>
 </div>
